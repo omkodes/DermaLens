@@ -1,0 +1,32 @@
+{
+  "id2label": {
+    "0": "AK",
+    "1": "BCC",
+    "2": "BKL",
+    "3": "DF",
+    "4": "MEL",
+    "5": "NV",
+    "6": "SCC",
+    "7": "VASC"
+  },
+  "label2id": {
+    "AK": 0,
+    "BCC": 1,
+    "BKL": 2,
+    "DF": 3,
+    "MEL": 4,
+    "NV": 5,
+    "SCC": 6,
+    "VASC": 7
+  },
+  "disease_descriptions": {
+    "AK": "Actinic Keratosis / Solar Keratosis (Pre-cancerous)",
+    "BCC": "Basal Cell Carcinoma (Malignant)",
+    "BKL": "Benign Keratosis-like Lesions",
+    "DF": "Dermatofibroma (Benign)",
+    "MEL": "Melanoma (Malignant Skin Cancer)",
+    "NV": "Melanocytic Nevus (Normal Mole)",
+    "SCC": "Squamous Cell Carcinoma (Malignant)",
+    "VASC": "Vascular Lesion (Benign)"
+  }
+}
