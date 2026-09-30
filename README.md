@@ -4,7 +4,8 @@
 
 An integrated, context-aware Clinical AI Assistant powered by Google's **Gemini 3.5 Flash-Lite** provides patient education and pre-consultation inquiry preparation without compromising private biometric image data.
 
-For detailed Android software architecture, mobile performance engineering, hardware benchmarks, and AppD ablation experiments, read the [**Technical Report**](TECHNICAL_REPORT.md).
+- 📄 [**Technical Report**](TECHNICAL_REPORT.md) — Deep dive into Android software architecture, mobile performance engineering, and AppD ablation experiments.
+- 📊 [**Presentation Deck (PPT)**](https://drive.google.com/file/d/1OfW89iifFCQK5i5r82n0fyzZiEl0jEEl/view?usp=sharing) — High-level architectural walkthrough, edge design trade-offs, and result benchmarks.
 
 ---
 
@@ -195,7 +196,7 @@ Tested on **Google Pixel 7** (Google Tensor G2) and **Samsung Galaxy S21** (Snap
 | **Melanoma Sensitivity** | **94.1%** ($N=3,200$) | $> 90.0\%$ |
 | **Overall Macro AUC-ROC** | **0.957** across 8 ISIC classes | $> 0.900$ |
 
-For full tabular breakdowns and ablation experiments, consult [**TECHNICAL_REPORT.md**](TECHNICAL_REPORT.md).
+For full tabular breakdowns and ablation experiments, consult the [**Technical Report**](TECHNICAL_REPORT.md) and [**Presentation Deck**](https://drive.google.com/file/d/1OfW89iifFCQK5i5r82n0fyzZiEl0jEEl/view?usp=sharing).
 
 ---
 
