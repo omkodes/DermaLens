@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.dermalens.navigation.DermaLensNavGraph
 import com.example.dermalens.navigation.Screen
 import com.example.dermalens.ui.MainScaffold
+import com.example.dermalens.ui.screens.ChatScreen
 import com.example.dermalens.ui.screens.ConsentScreen
 import com.example.dermalens.ui.screens.EditProfileScreen
 import com.example.dermalens.ui.screens.HistoryScreen
@@ -133,6 +134,9 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate(Screen.Home.route) {
                                         popUpTo(Screen.Home.route) { inclusive = false }
                                     }
+                                },
+                                onNavigateToChat = { screeningId ->
+                                    navController.navigate(Screen.Chat.createRoute(screeningId))
                                 }
                             )
                         },
@@ -142,6 +146,9 @@ class MainActivity : ComponentActivity() {
                                 onStartScanClick = {
                                     screeningViewModel.resetWizard()
                                     navController.navigate(Screen.Scan.route)
+                                },
+                                onNavigateToChat = { screeningId ->
+                                    navController.navigate(Screen.Chat.createRoute(screeningId))
                                 }
                             )
                         },
@@ -166,6 +173,13 @@ class MainActivity : ComponentActivity() {
                                 onSaveProfile = { updated ->
                                     profileViewModel.saveProfile(updated)
                                 },
+                                onNavigateBack = {
+                                    navController.popBackStack()
+                                }
+                            )
+                        },
+                        chatContent = { _ ->
+                            ChatScreen(
                                 onNavigateBack = {
                                     navController.popBackStack()
                                 }

@@ -36,6 +36,7 @@ fun ScanStep6ResultScreen(
     diagnoses: List<SkinDiagnosis> = emptyList(),
     topFactors: List<String> = emptyList(),
     onDoneClick: () -> Unit,
+    onChatClick: (Long) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -300,26 +301,37 @@ fun ScanStep6ResultScreen(
                 .padding(bottom = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            OutlinedButton(
-                onClick = {
-                    Toast.makeText(context, "AI Clinical Chat Assistant coming soon in a future update.", Toast.LENGTH_SHORT).show()
-                },
-                modifier = Modifier
-                    .weight(1f)
-                    .height(52.dp),
-                shape = RoundedCornerShape(14.dp),
-                colors = ButtonDefaults.outlinedButtonColors(contentColor = MedicalPrimary),
-                border = ButtonDefaults.outlinedButtonBorder.copy(
-                    brush = SolidColor(MedicalOutlineVariant)
-                )
+            Column(
+                modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Icon(
-                    imageVector = Icons.Default.ChatBubbleOutline,
-                    contentDescription = null,
-                    modifier = Modifier.size(18.dp)
+                OutlinedButton(
+                    onClick = {
+                        onChatClick(resultEntity.id)
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(52.dp),
+                    shape = RoundedCornerShape(14.dp),
+                    colors = ButtonDefaults.outlinedButtonColors(contentColor = MedicalPrimary),
+                    border = ButtonDefaults.outlinedButtonBorder.copy(
+                        brush = SolidColor(MedicalOutlineVariant)
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ChatBubbleOutline,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text("Chat AI", fontWeight = FontWeight.SemiBold)
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "Requires Internet",
+                    fontSize = 11.sp,
+                    color = MedicalOutline
                 )
-                Spacer(modifier = Modifier.width(6.dp))
-                Text("Chat AI", fontWeight = FontWeight.SemiBold)
             }
 
             Button(

@@ -97,6 +97,7 @@ test-results/
 # ====================================================================
 health_checkup_app_blueprint.md
 DERMALENS_IMPLEMENTATION_PLAN.md
+DERMALENS_CHAT_AI_IMPLEMENTATION_PLAN.md
 DERMALENS_PROGRESS.md
 DERMALENS_SUBTASKS.md
 ANDROID_INTEGRATION_GUIDE.md

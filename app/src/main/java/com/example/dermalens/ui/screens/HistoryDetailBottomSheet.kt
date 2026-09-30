@@ -6,6 +6,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ChatBubbleOutline
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
@@ -33,7 +34,8 @@ import java.util.Locale
 @Composable
 fun HistoryDetailBottomSheet(
     screening: ScreeningHistoryEntity,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    onNavigateToChat: (Long) -> Unit = {}
 ) {
     val dateStr = SimpleDateFormat("MMMM dd, yyyy • HH:mm", Locale.getDefault())
         .format(Date(screening.timestamp))
@@ -263,6 +265,49 @@ fun HistoryDetailBottomSheet(
                 DifferentialDrawer(diagnoses = parsedDiagnoses)
                 Spacer(modifier = Modifier.height(14.dp))
             }
+
+            // Discuss with AI Button
+            Button(
+                onClick = {
+                    onDismiss()
+                    onNavigateToChat(screening.id)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+                shape = RoundedCornerShape(14.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MedicalPrimary,
+                    contentColor = MedicalOnPrimary
+                ),
+                elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ChatBubbleOutline,
+                    contentDescription = "Discuss with AI",
+                    modifier = Modifier.size(18.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = "Discuss with AI",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 15.sp
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Surface(
+                    shape = RoundedCornerShape(6.dp),
+                    color = MedicalOnPrimary.copy(alpha = 0.22f)
+                ) {
+                    Text(
+                        text = "Online feature",
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = MedicalOnPrimary,
+                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(14.dp))
 
             // Disclaimer
             Surface(

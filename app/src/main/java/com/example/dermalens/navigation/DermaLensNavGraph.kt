@@ -10,8 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 
 @Composable
 fun DermaLensNavGraph(
@@ -25,7 +27,8 @@ fun DermaLensNavGraph(
     scanContent: @Composable () -> Unit = { PlaceholderScreen("Scan Wizard") },
     historyContent: @Composable () -> Unit = { PlaceholderScreen("History Screen") },
     profileContent: @Composable () -> Unit = { PlaceholderScreen("Profile Screen") },
-    editProfileContent: @Composable () -> Unit = { PlaceholderScreen("Edit Profile Screen") }
+    editProfileContent: @Composable () -> Unit = { PlaceholderScreen("Edit Profile Screen") },
+    chatContent: @Composable (Long) -> Unit = { id -> PlaceholderScreen("Chat Screen $id") }
 ) {
     NavHost(
         navController = navController,
@@ -107,6 +110,42 @@ fun DermaLensNavGraph(
             }
         ) {
             editProfileContent()
+        }
+        composable(
+            route = Screen.Chat.route,
+            arguments = listOf(
+                navArgument("screeningId") {
+                    type = NavType.LongType
+                    defaultValue = -1L
+                }
+            ),
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(durationMillis = 350, easing = FastOutSlowInEasing)
+                ) + fadeIn(animationSpec = tween(350))
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(durationMillis = 350, easing = FastOutSlowInEasing)
+                ) + fadeOut(animationSpec = tween(350))
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(durationMillis = 350, easing = FastOutSlowInEasing)
+                ) + fadeIn(animationSpec = tween(350))
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(durationMillis = 350, easing = FastOutSlowInEasing)
+                ) + fadeOut(animationSpec = tween(350))
+            }
+        ) { backStackEntry ->
+            val screeningId = backStackEntry.arguments?.getLong("screeningId") ?: -1L
+            chatContent(screeningId)
         }
     }
 }

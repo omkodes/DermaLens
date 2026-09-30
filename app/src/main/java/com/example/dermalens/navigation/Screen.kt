@@ -9,4 +9,7 @@ sealed class Screen(val route: String) {
     object History : Screen("history")
     object Profile : Screen("profile")
     object EditProfile : Screen("edit_profile")
+    object Chat : Screen("chat/{screeningId}") {
+        fun createRoute(screeningId: Long): String = "chat/$screeningId"
+    }
 }

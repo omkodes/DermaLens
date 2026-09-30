@@ -25,6 +25,7 @@ import com.example.dermalens.ui.viewmodel.ScreeningViewModel
 fun ScanWizardContainer(
     viewModel: ScreeningViewModel,
     onDismissWizard: () -> Unit,
+    onNavigateToChat: (Long) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val currentStep by viewModel.currentStep.collectAsState()
@@ -187,7 +188,8 @@ fun ScanWizardContainer(
                         resultEntity?.let { entity ->
                             ScanStep6ResultScreen(
                                 resultEntity = entity,
-                                onDoneClick = onDismissWizard
+                                onDoneClick = onDismissWizard,
+                                onChatClick = onNavigateToChat
                             )
                         } ?: Box(
                             modifier = Modifier.fillMaxSize(),

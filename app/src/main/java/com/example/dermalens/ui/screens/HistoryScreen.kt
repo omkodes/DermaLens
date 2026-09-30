@@ -29,6 +29,7 @@ import java.util.Locale
 fun HistoryScreen(
     historyList: List<ScreeningHistoryEntity>,
     onStartScanClick: () -> Unit,
+    onNavigateToChat: (Long) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     var selectedScreening by remember { mutableStateOf<ScreeningHistoryEntity?>(null) }
@@ -36,7 +37,11 @@ fun HistoryScreen(
     if (selectedScreening != null) {
         HistoryDetailBottomSheet(
             screening = selectedScreening!!,
-            onDismiss = { selectedScreening = null }
+            onDismiss = { selectedScreening = null },
+            onNavigateToChat = { id ->
+                selectedScreening = null
+                onNavigateToChat(id)
+            }
         )
     }
 

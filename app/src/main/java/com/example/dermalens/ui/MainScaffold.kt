@@ -35,7 +35,8 @@ fun MainScaffold(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    val isFullScreenRoute = currentRoute in listOf(
+    val isChatRoute = currentRoute?.startsWith("chat") == true
+    val isFullScreenRoute = isChatRoute || currentRoute in listOf(
         Screen.Splash.route,
         Screen.Consent.route,
         Screen.Onboarding.route,
@@ -45,7 +46,7 @@ fun MainScaffold(
     )
 
     val showBottomBar = !isFullScreenRoute
-    val showTopBar = currentRoute !in listOf(
+    val showTopBar = !isChatRoute && currentRoute !in listOf(
         Screen.Splash.route,
         Screen.Consent.route,
         Screen.Onboarding.route,

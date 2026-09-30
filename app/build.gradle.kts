@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,6 +7,14 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
 }
+
+val localProperties = Properties().apply {
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.inputStream().use { load(it) }
+    }
+}
+val geminiApiKey: String = localProperties.getProperty("GEMINI_API_KEY") ?: ""
 
 android {
     namespace = "com.example.dermalens"
@@ -20,6 +30,8 @@ android {
         ndk {
             abiFilters.addAll(listOf("arm64-v8a", "x86_64"))
         }
+
+        buildConfigField("String", "GEMINI_API_KEY", "\"$geminiApiKey\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,6 +58,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -97,6 +110,10 @@ dependencies {
     // Coroutines & Serialization
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.gson)
+
+    // AI Clinical Assistant & Markdown
+    implementation(libs.generativeai)
+    implementation(libs.compose.markdown)
 
     // Testing
     testImplementation(libs.junit)
